@@ -4,14 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>File Upload</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-image: url('/frontend/potato_img.avif');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            color: #ff5722; /* Add your desired color here */
+            font-size: 3rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Optional shadow for better visibility */
+        }
+
+        #dropBox {
+            border: 2px dashed #ccc;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 60px;
+            width: 600px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #dropBox:hover {
+            background-color: rgba(0, 123, 255, 0.1);
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        #response {
+            margin-top: 20px;
+            color: #fff;
+        }
+    </style>
 </head>
 <body>
-    <h1>Upload File</h1>
+    <h1>Please Upload An Image</h1>
+    <div id="dropBox">Drag and drop a file here or click to select</div>
     <form id="uploadForm">
-        <input id="fileInput" name="file" type="file">
+        <input id="fileInput" name="file" type="file" accept="image/*">
+        <br>/<br>
         <button type="submit">Upload</button>
     </form>
     <div id="response"></div>
-    <script src="script.js"></script>
+    <script src="/frontend/script.js"></script>
 </body>
 </html>
