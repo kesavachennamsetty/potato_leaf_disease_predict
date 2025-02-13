@@ -1,4 +1,4 @@
-
+# Data Source: Kaggle Potato leaf Disease
 # Potato Leaf Disease Predictor 🌿🔍
 The Potato Leaf Disease Predictor is a machine learning-based web application designed to classify potato leaves into three categories: Healthy, Early Blight, and Late Blight. Built using PyTorch and CNN (Convolutional Neural Networks), the model analyzes leaf images to detect potential diseases with high accuracy.
 
