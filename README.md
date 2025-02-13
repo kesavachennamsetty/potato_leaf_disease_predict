@@ -18,3 +18,26 @@ The Potato Leaf Disease Predictor is a machine learning-based web application de
 - ***OpenCV & PIL (Pillow)*** – For image preprocessing.
 - ***NumPy & Pandas*** – For data handling and transformation.
 - ***Matplotlib & Seaborn*** – For visualizing training performance.
+
+- **🚀 Deploy FastAPI App on Localhost**
+ 
+***Follow these steps to set up and run your FastAPI application locally.***
+
+Create a Virtual Environment
+Create and activate a virtual environment using the env.yaml file:
+
+- ***conda env create -f env.yaml***
+- ***conda activate your_env_name***
+(Replace your_env_name with the actual environment name from env.yaml.)
+- ***pip install uvicorn***
+
+Run the FastAPI Server
+Start the FastAPI app using the following command:
+- ***python -m uvicorn app:app --host 127.0.0.1 --port 8000 --reload***
+
+**🌍 Access the Application**
+- Frontend UI: http://127.0.0.1:8000/
+- API Docs (Swagger UI): http://127.0.0.1:8000/docs
+- ReDoc API Docs: http://127.0.0.1:8000/redoc
+
+
