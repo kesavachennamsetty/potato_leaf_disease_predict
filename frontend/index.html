@@ -24,9 +24,9 @@
         }
 
         h1 {
-            color: #ff5722; /* Add your desired color here */
+            color: #ff5722;
             font-size: 3rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Optional shadow for better visibility */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
         }
 
         #dropBox {
@@ -50,18 +50,29 @@
         #response {
             margin-top: 20px;
             color: #fff;
+            font-size: 1.2rem;
+        }
+
+        #loader {
+            margin-top: 20px;
+            color: white;
+            font-size: 1.5rem;
+            display: none;
         }
     </style>
 </head>
 <body>
-    <h1>Please Upload An Image</h1>
+    <h1>Please Only Upload a Potato Leaf Image</h1>
     <div id="dropBox">Drag and drop a file here or click to select</div>
     <form id="uploadForm">
-        <input id="fileInput" name="file" type="file" accept="image/*">
-        <br>/<br>
+        <input id="fileInput" name="file" type="file" accept="image/*">ls
+        
+        <br><br>
         <button type="submit">Upload</button>
     </form>
+    <div id="loader">Uploading<span id="dots"></span></div>
     <div id="response"></div>
+
     <script src="/frontend/script.js"></script>
 </body>
 </html>

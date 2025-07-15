@@ -2,18 +2,33 @@ document.addEventListener('DOMContentLoaded', function () {
     const dropBox = document.getElementById('dropBox');
     const fileInput = document.getElementById('fileInput');
     const responseText = document.getElementById('response');
+    const loader = document.getElementById('loader');
+    const dotsSpan = document.getElementById('dots');
 
-    if (!dropBox || !fileInput || !responseText) {
+    let dotInterval;
+
+    if (!dropBox || !fileInput || !responseText || !loader || !dotsSpan) {
         console.error("Required elements are missing. Check your HTML structure.");
         return;
     }
 
-    // Open file dialog when clicking the drop box
+    function startLoadingDots() {
+        let count = 0;
+        dotInterval = setInterval(() => {
+            count = (count + 1) % 4;
+            dotsSpan.textContent = '.'.repeat(count);
+        }, 500);
+    }
+
+    function stopLoadingDots() {
+        clearInterval(dotInterval);
+        dotsSpan.textContent = '';
+    }
+
     dropBox.addEventListener('click', () => {
         fileInput.click();
     });
 
-    // Handle file drag and drop
     dropBox.addEventListener('dragover', (event) => {
         event.preventDefault();
         dropBox.style.backgroundColor = 'rgba(0, 123, 255, 0.1)';
@@ -29,12 +44,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const files = event.dataTransfer?.files;
         if (files && files.length > 0) {
-            fileInput.files = files; // Assign files to the hidden input
+            fileInput.files = files;
             alert(`File "${files[0].name}" added!`);
         }
     });
 
-    // Form submission
     document.getElementById('uploadForm').addEventListener('submit', async function (event) {
         event.preventDefault();
 
@@ -53,15 +67,24 @@ document.addEventListener('DOMContentLoaded', function () {
         const formData = new FormData();
         formData.append('file', file);
 
+        // Show loader
+        loader.style.display = 'block';
+        responseText.textContent = '';
+        startLoadingDots();
+
         try {
-            const response = await fetch('http://127.0.0.1:8000/upload/', {
+            const response = await fetch('/upload/', {
                 method: 'POST',
                 body: formData,
             });
 
+            stopLoadingDots();
+            loader.style.display = 'none';
+
             if (!response.ok) {
                 const errorData = await response.json();
                 responseText.textContent = `Error: ${errorData.message || 'Failed to upload image'}`;
+                responseText.style.color = 'red';
                 return;
             }
 
@@ -69,7 +92,10 @@ document.addEventListener('DOMContentLoaded', function () {
             responseText.textContent = `Uploaded successfully! Server response: ${result.label}`;
             responseText.style.color = 'green';
         } catch (error) {
+            stopLoadingDots();
+            loader.style.display = 'none';
             responseText.textContent = `Error: ${error.message}`;
+            responseText.style.color = 'red';
         }
     });
 });
